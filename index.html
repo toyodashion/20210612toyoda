@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="keyword">
+    <ul v-for="user in filter">
+      <li>{{user.name}}</li>
+    </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el:"#app",
+      data:{
+          keyword:'',
+          users:[
+            {
+              name:'田中'
+            },
+            {
+              name:'鈴木'
+            },
+            {
+              name:'山田'
+            },
+            {
+              name:'佐藤'
+            }
+          ]
+      },
+      computed:{
+        filter:function(){
+          const users = [];
+          for(item in this.users){
+            const user = this.users[item];
+            if(user.name.indexOf(this.keyword) !== -1){
+              users.push(user)
+            }
+          }
+          return users;
+        }
+      }
+    })
+  </script>
+  <style>
+    ul{
+      padding: 0;
+      margin: 0;
+    }
+    li{
+      list-style: none;
+      padding: 10px;
+    }
+  </style>
+</body>
+</html>
